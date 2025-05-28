@@ -1,7 +1,8 @@
 # OREE
 
 <p>welcome to OREE where you can automate some recon stuff</p>
-![ore](/images/ore.png)
+
+![ore](images/ore.png)
 this tool will help automate subdomain finding and in the future it will fuzz and generate new attack vectors for you
 
 # usage
