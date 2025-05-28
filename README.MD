@@ -20,4 +20,4 @@ this tool will make a folder called <b>output</b> and it will have 3 txt files
 2. 403_subs.txt => this for 401,403 status codes and it's purpose is for fuzzing
 3. 404_subs.txt => like above this is 404 status code subdomains for fuzzing
 
-this tool is still being built by me only and i will making new version.
+this tool is still being built by me only and i will be making new versions soon :).
