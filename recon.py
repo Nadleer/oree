@@ -50,7 +50,6 @@ def main():
     subs_401 = httpx403(subs, output_dir)
     subs_404 = httpx404(subs, output_dir)
     
-    print("[*] gathering archived URLs and parameters...")
     archived_urls = getWaybackurls(domain, f"{output_dir}/subdomains/alive.txt", urls_dir)
 
 if __name__ == "__main__":

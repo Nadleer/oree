@@ -48,5 +48,5 @@ def getWaybackurls(domain ,file, output_dir):
     save_to_file(wayback_urls,wayback_file)
     save_to_file(gau_urls,gau_file)
     all_urls = wayback_urls + gau_urls
-    print(f"[+] total archived uRLs collected: {len(set(all_urls))}")
+    print(f"[+] total archived URLs collected: {len(set(all_urls))}")
     return list(set(all_urls))
