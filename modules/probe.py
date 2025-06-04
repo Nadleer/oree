@@ -1,8 +1,5 @@
 import subprocess
 
-
-
-
 def httpxAlive(subdomains):
     input_data = "\n".join(subdomains)
 
@@ -15,10 +12,12 @@ def httpxAlive(subdomains):
             print("httpx error:", result.stderr)
             return []
         
+        alive = result.stdout.splitlines()
         with open("output/subs_alive.txt", "w") as f:
             f.write(result.stdout)
 
         print ("[+] alive subdomains saved as subs_alive.txt")
+        return alive
 
 
     except FileNotFoundError:
