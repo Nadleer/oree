@@ -15,10 +15,11 @@ def main():
     args = parser.parse_args()
     domain = args.domain
 
-    # Create output directory
+    # Create output directory structure
     output_dir = f"output/{domain}"
-    output_dir2 = "output"
-    os.makedirs(output_dir,exist_ok=True)
+    urls_dir = os.path.join(output_dir, "urls")
+    os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(urls_dir, exist_ok=True)
     
     # Get subdomains from multiple sources
     print("[*] Gathering subdomains...")
@@ -43,20 +44,14 @@ def main():
     subs = sorted(list(subs))
     print(f"[+] Total unique subdomains found: {len(subs)}")
     
-    
-    
     # Probe subdomains
     print("[*] Probing subdomains...")
-    aliveSubs = httpxAlive(subs)
-    subs_401 = httpx403(subs)
-    subs_404 = httpx404(subs
-                        )
-    alive_subs_file = os.path.join(output_dir, "subs_alive.txt")
+    aliveSubs = httpxAlive(subs, output_dir)
+    subs_401 = httpx403(subs, output_dir)
+    subs_404 = httpx404(subs, output_dir)
     
     print("[*] gathering archived URLs and parameters...")
-    archived_urls = getWaybackurls(domain, alive_subs_file, output_dir)
-
-   
+    archived_urls = getWaybackurls(domain, f"{output_dir}/subdomains/alive.txt", urls_dir)
 
 if __name__ == "__main__":
     main()

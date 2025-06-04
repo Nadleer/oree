@@ -1,7 +1,10 @@
 import subprocess
+import os
 
-def httpxAlive(subdomains):
+def httpxAlive(subdomains, output_dir):
     input_data = "\n".join(subdomains)
+    subdomains_dir = os.path.join(output_dir, "subdomains")
+    os.makedirs(subdomains_dir, exist_ok=True)
 
     try:
         result = subprocess.run(['httpx', '-mc', '200','-silent'],
@@ -13,10 +16,10 @@ def httpxAlive(subdomains):
             return []
         
         alive = result.stdout.splitlines()
-        with open("output/subs_alive.txt", "w") as f:
+        with open(f"{subdomains_dir}/alive.txt", "w") as f:
             f.write(result.stdout)
 
-        print ("[+] alive subdomains saved as subs_alive.txt")
+        print (f"[+] alive subdomains saved as {subdomains_dir}/alive.txt")
         return alive
 
 
@@ -25,8 +28,10 @@ def httpxAlive(subdomains):
         return []
     
     
-def httpx404(subdomains):
+def httpx404(subdomains, output_dir):
     input_data ="\n".join(subdomains)
+    subdomains_dir = os.path.join(output_dir, "subdomains")
+    os.makedirs(subdomains_dir, exist_ok=True)
 
     try:
         result = subprocess.run(['httpx', '-mc', '404', '-silent'],
@@ -37,10 +42,10 @@ def httpx404(subdomains):
             print("httpx error", result.stderr)
             return []
         
-        with open("output/404_subs.txt","w") as f:
+        with open(f"{subdomains_dir}/404.txt","w") as f:
             f.write(result.stdout)
         
-        print("[+] 404 subdomains saved as 404_subs.txt")
+        print(f"[+] 404 subdomains saved as {subdomains_dir}/404.txt")
 
     except FileNotFoundError:
         print("httpx not found or not in path",result.stderr)
@@ -50,8 +55,11 @@ def httpx404(subdomains):
 
 
 
-def httpx403(subdomains):
+def httpx403(subdomains, output_dir):
     input_data = "\n".join(subdomains)
+    subdomains_dir = os.path.join(output_dir, "subdomains")
+    os.makedirs(subdomains_dir, exist_ok=True)
+
     try:
         result = subprocess.run(['httpx','-mc' ,'401', '403', '-silent'],
                                 input=input_data,
@@ -62,10 +70,10 @@ def httpx403(subdomains):
             print("httpx error",result.stderr) 
             return []
         
-        with open("output/403_subs.txt","w") as f:
+        with open(f"{subdomains_dir}/403.txt","w") as f:
             f.write(result.stdout)
 
-        print("[+] 403 and 401 subdomains saved as 403_subs.txt")
+        print(f"[+] 403 and 401 subdomains saved as {subdomains_dir}/403.txt")
 
     
 

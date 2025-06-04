@@ -1,23 +1,43 @@
 # OREE
 
-<p>welcome to OREE where you can automate some recon stuff</p>
+A reconnaissance tool that automates subdomain enumeration and analysis.
 
 ![ore](images/ore.png)
 
-this tool will help automate subdomain finding and in the future it will fuzz and generate new attack vectors for you
+## Features
 
-# usage
+- Automated subdomain discovery using multiple tools
+- Subdomain categorization by HTTP status codes
+- Wayback machine URL gathering
+- Organized output structure
 
+## Installation
+
+```bash
+git clone https://github.com/Nadleer/oree.git
 ```
+
+## Usage
+
+```bash
 python3 recon.py -d <domain>
 ```
 
-# how does it work
+## Output Structure
 
-this tool will make a folder called <b>output</b> and it will have 3 txt files
+```
+output/
+└── domain.com/
+    ├── urls/
+    │   └── urls.txt         # Wayback machine URLs
+    └── subdomains/
+        ├── alive.txt        # 200 OK status subdomains
+        ├── 403.txt          # 401/403 status subdomains
+        └── 404.txt          # 404 status subdomains
+```
 
-1. subs_alive.txt => this for 200 OK status subdomains
-2. 403_subs.txt => this for 401,403 status codes and it's purpose is for fuzzing
-3. 404_subs.txt => like above this is 404 status code subdomains for fuzzing
+## Future Plans
 
-this tool is still being built by me only and i will be making new versions soon :).
+- Fuzzing capabilities
+- Attack vector generation
+- Additional reconnaissance features
